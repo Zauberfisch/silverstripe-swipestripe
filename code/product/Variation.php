@@ -366,7 +366,7 @@ class Variation extends DataObject {
 	 * @see DataObject::validate()
 	 * @return ValidationResult
 	 */
-	protected function validate() {
+	public function validate() {
 		
 		$result = new ValidationResult(); 
 
