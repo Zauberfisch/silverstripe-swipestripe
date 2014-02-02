@@ -326,10 +326,6 @@ class Product_Controller extends Page_Controller {
 				if ($product && $product->exists()) {
 					$this->dataRecord = $product; 
 					$this->failover = $this->dataRecord;
-					
-					$this->customise(array(
-						'Product' => $this->data()
-					));
 				}
 			}
 		}
