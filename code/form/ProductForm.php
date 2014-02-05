@@ -7,10 +7,6 @@ class ProductForm extends Form {
 	protected $product;
 	protected $quantity;
 	protected $redirectURL;
-	
-	private static $allowed_actions = array(
-		'add'
-	);
 
 	public function __construct($controller, $name, $quantity = null, $redirectURL = null) {
 
