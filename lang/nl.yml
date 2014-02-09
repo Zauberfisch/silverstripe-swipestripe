@@ -8,7 +8,6 @@ nl:
   ShopAdmin_EmailAdmin:
     MENUTITLE: 'Winkel e-mails'
   AccountPage:
-    CANNOT_VIEW_ORDER: 'Je kan geen bestellingen bekijken die niet bij jou horen.'
     DATE: Datum
     DESCRIPTION: 'Algemene contentpagina'
     NO_ORDERS: 'Je hebt momenteel geen bestellingen. In de toekomst kun je je recente bestellingen hier zien.'

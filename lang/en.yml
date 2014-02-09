@@ -8,7 +8,6 @@ en:
   ShopAdmin_EmailAdmin:
     MENUTITLE: 'Shop Emails'
   AccountPage:
-    CANNOT_VIEW_ORDER: 'You cannot view orders that do not belong to you.'
     DATE: Date
     DESCRIPTION: 'Generic content page'
     NO_ORDERS: 'You do not currently have any orders. In future you will be able to view your recent orders from here.'

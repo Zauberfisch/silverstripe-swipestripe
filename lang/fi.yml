@@ -8,7 +8,6 @@ fi:
   ShopAdmin_EmailAdmin:
     MENUTITLE: 'Kaupan sähköposti'
   AccountPage:
-    CANNOT_VIEW_ORDER: 'Et voi katsella tilauksia, jotka eivät kuulu sinulle.'
     DATE: Date
     DESCRIPTION: 'Yleinen sisältösivu'
     NO_ORDERS: 'Sinulla ei ole yhtään tilausta. Myöhemmin näet tältä sivulta ostoshistoriasi.'
