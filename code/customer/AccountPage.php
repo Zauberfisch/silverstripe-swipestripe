@@ -119,7 +119,7 @@ class AccountPage_Controller extends Page_Controller {
 	public function init() {
 		parent::init();
 
-		if(!Permission::check('VIEW_ORDER')) {
+		if(!Customer::currentUserID()) {
 			return $this->redirect(Director::absoluteBaseURL() . 'Security/login?BackURL=' . urlencode($this->getRequest()->getVar('url')));
 		}
 	}
@@ -180,17 +180,23 @@ class AccountPage_Controller extends Page_Controller {
 				->where("\"Order\".\"ID\" = " . Convert::raw2sql($orderID))
 				->First();
 
-			if ($order && $order->exists() && $order->canView($member)) {
-				Session::set('Repay', array(
-					'OrderID' => $order->ID
-				));
-				Session::save();
-
-				return array(
-					'Order' => $order,
-					'RepayForm' => $this->RepayForm()
-				);
+			if (!$order || !$order->exists()) {
+				return $this->httpError(403, _t('AccountPage.NO_ORDER_EXISTS', 'Order does not exist.'));
 			}
+
+			if (!$order->canView($member)) {
+				return $this->httpError(403, _t('AccountPage.CANNOT_VIEW_ORDER', 'You cannot view orders that do not belong to you.'));
+			}
+
+			Session::set('Repay', array(
+				'OrderID' => $order->ID
+			));
+			Session::save();
+
+			return array(
+				'Order' => $order,
+				'RepayForm' => $this->RepayForm()
+			);
 		}
 		return $this->httpError(403, _t('AccountPage.NO_ORDER_EXISTS', 'Order does not exist.'));
 	}
