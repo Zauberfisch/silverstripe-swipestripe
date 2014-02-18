@@ -78,16 +78,16 @@ class OrderForm extends Form {
 
 			$personalFields = CompositeField::create(
 				new HeaderField(_t('CheckoutPage.ACCOUNT',"Account"), 3),
-				new CompositeField(
+				CompositeField::create(
 					EmailField::create('Email', _t('CheckoutPage.EMAIL', 'Email'))
 						->setCustomValidationMessage(_t('CheckoutPage.PLEASE_ENTER_EMAIL_ADDRESS', "Please enter your email address."))
-				),
-				new CompositeField(
+				)->addExtraClass('account-email'),
+				CompositeField::create(
 					new FieldGroup(
 						new ConfirmedPasswordField('Password', _t('CheckoutPage.PASSWORD', "Password"))
 					)
-				),
-				new CompositeField(
+				)->addExtraClass('account-password'),
+				CompositeField::create(
 					new LiteralField(
 						'AccountInfo', 
 						"
@@ -98,7 +98,7 @@ class OrderForm extends Form {
 						</p>
 						"
 					)
-				)
+				)->addExtraClass('account-info')
 			)->setID('PersonalDetails')->setName('PersonaDetails');
 		}
 
