@@ -2,7 +2,7 @@
 /**
  * Represents an Option for an Attribute, e.g: Small, Medium, Large, Red etc.
  * Default Options can be created for Attributes, they are pre populated and duplicated into the Product
- * when the Attribute is added to a Product. Options can be changed for each Product. 
+ * when the Attribute is added to a Product. Options can be changed for each Product.
  * Default Options will have a ProductID of 0.
  * 
  * @author Frank Mullenger <frankmullenger@gmail.com>

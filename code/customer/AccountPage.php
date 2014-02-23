@@ -160,11 +160,11 @@ class AccountPage_Controller extends Page_Controller {
 				->where("\"Order\".\"ID\" = " . Convert::raw2sql($orderID))
 				->First();
 
-			if ($order && $order->exists() && $order->canView($member)) {
+//			if ($order && $order->exists() && $order->canView($member)) {
 				return array(
 					'Order' => $order
 				);
-			}
+//			}
 		}
 		return $this->httpError(403, _t('AccountPage.NO_ORDER_EXISTS', 'Order does not exist.'));
 	}
