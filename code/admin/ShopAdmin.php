@@ -352,6 +352,8 @@ class ShopAdmin_EmailAdmin extends ShopAdmin {
 		if($form->Fields()->hasTabset()) $form->Fields()->findOrMakeTab('Root')->setTemplate('CMSTabSet');
 		$form->setFormAction(Controller::join_links($this->Link($this->sanitiseClassName($this->modelClass)), 'EmailSettings/EmailSettingsForm'));
 
+		$this->extend('updateEmailSettingsForm', $form);
+
 		$form->loadDataFrom($shopConfig);
 
 		return $form;
