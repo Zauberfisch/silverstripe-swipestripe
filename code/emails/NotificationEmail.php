@@ -31,7 +31,7 @@ class NotificationEmail extends ProcessedEmail {
 		if ($siteConfig->NotificationBody) $this->body = $siteConfig->NotificationBody;
 		
 		if ($customer->Email) $this->from = $customer->Email; 
-		elseif (Email::getAdminEmail()) $this->from = Email::getAdminEmail();
+		elseif (Config::inst()->get('Email', 'admin_email')) $this->from = Config::inst()->get('Email', 'admin_email');
 		else $this->from = 'no-reply@' . $_SERVER['HTTP_HOST'];
 		
 		$this->signature = '';
