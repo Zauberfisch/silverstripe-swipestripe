@@ -193,6 +193,33 @@ class Order extends DataObject implements PermissionProvider {
 			'filter' => 'ShopSearchFilter_OptionSet'
 		)
 	);
+
+	/**
+	 * Notification handlers for sending out notifications after certain events like payment
+	 * Use the config system to add additional handlers. Each handler (eg a subclass of {@link ProcessedEmail})
+	 * should impalement a send() method and Accept two constructor parameters: $Member, $Order
+	 *
+	 * currently, the following events are available:
+	 * - onBeforePayment with the parameters: Customer, Order
+	 * - onAfterPayment with the parameters: Customer, Order
+	 * - onBeforeOrderUpdateCreate with the parameters: Customer, Order, Order_Update
+	 * - onAfterOrderUpdateCreate with the parameters: Customer, Order, Order_Update
+	 * - onBeforeOrderUpdateWrite with the parameters: Customer, Order, Order_Update
+	 * - onAfterOrderUpdateWrite with the parameters: Customer, Order, Order_Update
+	 *
+	 * @var array
+	 */
+	private static $notification_handlers = array(
+		'onBeforePayment' => array(),
+		'onAfterPayment' => array(
+			'ReceiptEmail',
+//			'NotificationEmail',
+		),
+		'onBeforeOrderUpdateCreate' => array(),
+		'onAfterOrderUpdateCreate' => array(),
+		'onBeforeOrderUpdateWrite' => array(),
+		'onAfterOrderUpdateWrite' => array(),
+	);
 	
 	/**
 	 * The default sort expression. This will be inserted in the ORDER BY
@@ -372,6 +399,7 @@ class Order extends DataObject implements PermissionProvider {
 
 	public function onBeforePayment() {
 		$this->extend('onBeforePayment');
+		$this->sendNotifications('onBeforePayment');
 	}
 
 	/**
@@ -386,12 +414,30 @@ class Order extends DataObject implements PermissionProvider {
 		$this->PaymentStatus = ($this->getPaid()) ? 'Paid' : 'Unpaid';
 		$this->write();
 
-		ReceiptEmail::create($this->Member(), $this)
-			->send();
-		NotificationEmail::create($this->Member(), $this)
-			->send();
-
 		$this->extend('onAfterPayment');
+		$this->sendNotifications('onAfterPayment');
+	}
+
+	/**
+	 * @param string $event
+	 * @return $this
+	 */
+	public function sendNotifications($event) {
+		$args = func_get_args();
+		$event = array_shift($args);
+		$events = Config::inst()->get($this->class, 'notification_handlers');
+		if (isset($events[$event])) {
+			$handlers = is_array($events[$event]) ? $events[$event] : array($events[$event]);
+			$this->extend('onBeforeSendNotifications', $handlers, $args, $event);
+			if (count($handlers)) {
+				foreach($handlers as $handlerClass) {
+					$argsForHandler = array_merge(array($this->Member(), $this), $args);
+					call_user_func_array("$handlerClass::create", $argsForHandler)->send();
+				}
+			}
+			$this->extend('onAfterSendNotifications', $handlers, $args, $event);
+		}
+		return $this;
 	}
 	
 	/**
@@ -849,6 +895,7 @@ class Order_Update extends DataObject {
 		'Member.Name' => 'Owner',
 		'VisibleSummary' => 'Visible'
 	);
+	protected $isNewOrderUpdate = false;
 
 	/**
 	 * TODO are we sure this is the way to go?
@@ -866,23 +913,29 @@ class Order_Update extends DataObject {
 		}
 	}
 
-	/**
-	 * Update stock levels for {@link Item}.
-	 * 
-	 * @see DataObject::onAfterWrite()
-	 */
-	public function onAfterWrite() {
+	protected function onBeforeWrite() {
+		parent::onBeforeWrite();
+		$this->isNewOrderUpdate = !$this->isInDB();
+		$order = $this->Order();
+		if ($order && $order->exists()) {
+			$order->extend('onBeforeOrderUpdate' . $this->isNewOrderUpdate ? 'Create' : 'Write', $this);
+			$order->sendNotifications('onBeforeOrderUpdate' . $this->isNewOrderUpdate ? 'Create' : 'Write', $this);
+		}
+	}
 
+	public function onAfterWrite() {
 		parent::onAfterWrite();
-		
-		// Update the Order, setting the same status
-		if ($this->Status) {
-			$order = $this->Order();
-			if ($order->exists()) {
+		$order = $this->Order();
+		if ($order && $order->exists()) {
+			if ($this->Status) {
+				// Update the Order, setting the same status
 				$order->Status = $this->Status;
 				$order->write();
 			}
+			$order->extend('onAfterOrderUpdate' . $this->isNewOrderUpdate ? 'Create' : 'Write', $this);
+			$order->sendNotifications('onAfterOrderUpdate' . $this->isNewOrderUpdate ? 'Create' : 'Write', $this);
 		}
+		$this->isNewOrderUpdate = false;
 	}
 
 	/**
