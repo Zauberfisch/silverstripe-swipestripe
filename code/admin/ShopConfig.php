@@ -6,6 +6,20 @@
  * @copyright Copyright (c) 2011, Frank Mullenger
  * @package swipestripe
  * @subpackage admin
+ * @property string LicenceKey
+ * @property string BaseCurrency
+ * @property int CartTimeout
+ * @property string CartTimeoutUnit
+ * @property bool StockCheck
+ * @property string StockManagement
+ * @property string EmailSignature
+ * @property string ReceiptSubject
+ * @property string ReceiptBody
+ * @property string ReceiptFrom
+ * @property string NotificationSubject
+ * @property string NotificationBody
+ * @property string NotificationTo
+ * @method HasManyList Attributes
  */
 class ShopConfig extends DataObject {
 
@@ -43,6 +57,9 @@ class ShopConfig extends DataObject {
 		'StockManagement' => 'strict'
 	);
 
+	/**
+	 * @return static
+	 */
 	public static function current_shop_config() {
 
 		//TODO: lazy load this
@@ -50,6 +67,9 @@ class ShopConfig extends DataObject {
 		return ShopConfig::get()->First();
 	}
 
+	/**
+	 * @return null|string
+	 */
 	public static function base_currency_warning() {
 		$config = self::current_shop_config();
 		$warning = null;
