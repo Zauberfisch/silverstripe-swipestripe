@@ -180,9 +180,9 @@ class ProductForm extends Form {
 		
 		//Show feedback if redirecting back to the Product page
 		if (!$this->getRequest()->requestVar('Redirect')) {
-			$cartPage = DataObject::get_one('CartPage');
+			$cartPage = CartPage::get()->First();
 			$message = _t('ProductForm.PRODUCT_ADDED', 'The product was added to your cart.');
-			if ($cartPage->exists()) {
+			if ($cartPage && $cartPage->exists()) {
 				$message = _t(
 					'ProductForm.PRODUCT_ADDED_LINK', 
 					'The product was added to {openanchor}your cart{closeanchor}.',
