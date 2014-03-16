@@ -60,11 +60,11 @@ class ProcessedEmail extends Email {
 	 */
 	protected function InlineCSS() {
 		// Get css for Email by reading css file and put css inline for emogrification
-		$file = Director::getAbsFile(Config::inst()->get($this->class, 'css_file'));
-		if (!file_exists($file)) {
-			$file = Director::getAbsFile('swipestripe/css/ShopEmail.css');
+		$file = Config::inst()->get($this->class, 'css_file');
+		if (!$file || !file_exists(Director::getAbsFile($file)) || is_file(Director::getAbsFile($file))) {
+			$file = 'swipestripe/css/ShopEmail.css';
 		}
-		return file_get_contents($file);
+		return sprintf('<style>%s</style>', file_get_contents(Director::getAbsFile($file)));
 	}
 
 	/**
@@ -105,17 +105,14 @@ class ProcessedEmail extends Email {
 		$from = null,
 		$to = null,
 		$subject = null,
-		$body = null,
-		$bounceHandlerURL = null,
-		$cc = null,
-		$bcc = null
+		$body = null
 	) {
 		$this->customer = $customer;
 		$this->order = $order;
 		if (!$from) {
 			$from = Config::inst()->get('Email', 'admin_email') ? : 'no-reply@' . $_SERVER['HTTP_HOST'];
 		}
-		parent::__construct($from, $to, $subject, $body, $bounceHandlerURL, $cc, $bcc);
+		parent::__construct($from, $to, $subject, $body);
 	}
 
 }
