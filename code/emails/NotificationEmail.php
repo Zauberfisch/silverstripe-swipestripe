@@ -1,8 +1,9 @@
 <?php
+
 /**
  * A notification email that is sent to an email address specified in {@link ShopConfig}, usually
- * a site administrator or owner. 
- * 
+ * a site administrator or owner.
+ *
  * @author Frank Mullenger <frankmullenger@gmail.com>
  * @copyright Copyright (c) 2011, Frank Mullenger
  * @package swipestripe
@@ -12,51 +13,30 @@ class NotificationEmail extends ProcessedEmail {
 
 	/**
 	 * Create the new notification email.
-	 * 
+	 *
 	 * @param Member $customer
 	 * @param Order $order
-	 * @param String $from
-	 * @param String $to
-	 * @param String $subject
-	 * @param String $body
-	 * @param String $bounceHandlerURL
-	 * @param String $cc
-	 * @param String $bcc
 	 */
-	public function __construct(Member $customer, Order $order, $from = null, $to = null, $subject = null, $body = null, $bounceHandlerURL = null, $cc = null, $bcc = null) {
-		
-		$siteConfig = ShopConfig::get()->first();
-		if ($siteConfig->NotificationTo) $this->to = $siteConfig->NotificationTo; 
-		if ($siteConfig->NotificationSubject) $this->subject = $siteConfig->NotificationSubject . ' - Order #'.$order->ID;
-		if ($siteConfig->NotificationBody) $this->body = $siteConfig->NotificationBody;
-		
-		if ($customer->Email) $this->from = $customer->Email; 
-		elseif (Config::inst()->get('Email', 'admin_email')) $this->from = Config::inst()->get('Email', 'admin_email');
-		else $this->from = 'no-reply@' . $_SERVER['HTTP_HOST'];
-		
-		$this->signature = '';
-		$adminLink = Director::absoluteURL('/admin/shop/');
-
-		//Get css for Email by reading css file and put css inline for emogrification
-		$this->setTemplate('Order_NotificationEmail');
-		
-		if (file_exists(Director::getAbsFile($this->ThemeDir().'/css/ShopEmail.css'))) {
-			$css = file_get_contents(Director::getAbsFile($this->ThemeDir().'/css/ShopEmail.css'));
+	public function __construct(Member $customer, Order $order) {
+		$shopConfig = ShopConfig::current_shop_config();
+		if ($shopConfig->NotificationTo) {
+			$to = $shopConfig->NotificationTo;
+		} elseif (Config::inst()->get('Email', 'admin_email')) {
+			$to = Config::inst()->get('Email', 'admin_email');
+		} else {
+			// TODO it should not be possible that Email is empty, but there is nothing we can do here, SwipeStripe should ensure an Email is only created if a Email is set on the ShopConfig
+			$to = '';
 		}
-		else {
-			$css = file_get_contents(Director::getAbsFile('swipestripe/css/ShopEmail.css'));
-		}
-
-		$this->populateTemplate(
+		$subject = _t(
+			'NotificationEmail.Subject',
+			'{subject} - Order #{orderID}',
 			array(
-				'Message' => $this->Body(),
-				'Order' => $order,
-				'Customer' => $customer,
-				'InlineCSS' => "<style>$css</style>",
-				'Signature' => $this->signature,
-				'AdminLink' => $adminLink
+				$shopConfig->NotificationSubject ? : 'Notification',
+				$order->ID,
 			)
 		);
-		parent::__construct($from, null, $subject, $body, $bounceHandlerURL, $cc, $bcc);
+		$this->setTemplate('Order_NotificationEmail');
+		$this->populateTemplate(array('AdminLink' => Director::absoluteURL('/admin/shop/')));
+		parent::__construct($customer, $order, $customer->Email, $to, $subject, $shopConfig->NotificationBody);
 	}
 }
