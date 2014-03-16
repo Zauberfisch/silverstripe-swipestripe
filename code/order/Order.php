@@ -3,6 +3,21 @@
  * Order, created as soon as a user adds a {@link Product} to their cart, the cart is 
  * actually an Order with status of 'Cart'. Has many {@link Item}s and can have {@link Modification}s
  * which might represent a {@link Modifier} like shipping, tax, coupon codes.
+ *
+ * @property string Status
+ * @property string PaymentStatus
+ * @property float TotalPrice
+ * @property float SubTotalPrice
+ * @property string BaseCurrency
+ * @property string BaseCurrencySymbol
+ * @property string OrderedOn
+ * @property string LastActive
+ * @property string Env
+ * @method Customer Member
+ * @method HasManyList Items
+ * @method HasManyList Payments
+ * @method HasManyList Modifications
+ * @method HasManyList Updates
  */
 class Order extends DataObject implements PermissionProvider {
 	
@@ -47,6 +62,9 @@ class Order extends DataObject implements PermissionProvider {
 		'Env' => 'Varchar(10)',
 	);
 
+	/**
+	 * @return Price
+	 */
 	public function Total() {
 
 		// TODO: Multi currency
@@ -70,6 +88,9 @@ class Order extends DataObject implements PermissionProvider {
 		return $amount;
 	}
 
+	/**
+	 * @return Price
+	 */
 	public function SubTotal() {
 
 		// TODO: Multi currency
@@ -93,6 +114,9 @@ class Order extends DataObject implements PermissionProvider {
 		return $amount;
 	}
 
+	/**
+	 * @return Price
+	 */
 	public function CartTotalPrice() {
 
 		$total = $this->SubTotal();
@@ -204,15 +228,11 @@ class Order extends DataObject implements PermissionProvider {
 	}
 	
 	/**
-	 * Prevent orders from being edited in the CMS
-	 * 
 	 * @see DataObject::canEdit()
 	 * @return Boolean False always
 	 */
 	public function canEdit($member = null) {
-		$administratorPerm = Permission::check('EDIT_ORDER', 'any', $member);
-		
-		return $administratorPerm;
+		return Permission::check('EDIT_ORDER', 'any', $member);
 	}
 	
 	/**
@@ -232,6 +252,7 @@ class Order extends DataObject implements PermissionProvider {
 	 * @return Boolean False always
 	 */
 	public function canDelete($member = null) {
+		// TODO comment says prevent delete, but code does the opposite
 		return true;
 	}
 
@@ -338,7 +359,7 @@ class Order extends DataObject implements PermissionProvider {
 		}
 
 		//If orders do not exist set the first ID
-		if ((!Order::get()->count() && true) && is_numeric(self::$first_id) && self::$first_id > 0) {
+		if (!Order::get()->count() && is_numeric(self::$first_id) && self::$first_id > 0) {
 			$this->ID = self::$first_id;
 		}
 
@@ -347,10 +368,6 @@ class Order extends DataObject implements PermissionProvider {
 
 		//Update paid status
 		$this->PaymentStatus = ($this->getPaid()) ? 'Paid' : 'Unpaid';
-	}
-
-	public function onAfterWrite() {
-		parent::onAfterWrite();
 	}
 
 	public function onBeforePayment() {
@@ -411,22 +428,10 @@ class Order extends DataObject implements PermissionProvider {
 
 		return $fields;
 	}
-	
-	/**
-	 * Set custom CMS actions which call 
-	 * OrderAdmin_RecordController actions of the same name
-	 * 
-	 * @see DataObject::getCMSActions()
-	 * @return FieldList
-	 */
-	public function getCMSActions() {
-		$actions = parent::getCMSActions();
-		return $actions;
-	}
-	
+
 	/**
 	 * Helper to get a nicely formatted total of the order
-	 * 
+	 *
 	 * @return String Order total formatted with Nice()
 	 */
 	public function SummaryOfTotal() {
@@ -443,16 +448,6 @@ class Order extends DataObject implements PermissionProvider {
 		//get the account page and go to it
 		$account = DataObject::get_one('AccountPage');
 		return Controller::join_links($account->Link("order"), $this->ID);
-	}
-
-	/**
-	 * Helper to get {@link Payment}s that are made against this Order
-	 * 
-	 * @return ArrayList Set of Payment objects
-	 */
-	public function Payments() {
-		return Payment::get()
-			->where("\"OrderID\" = {$this->ID}");
 	}
 	
 	/**
@@ -656,7 +651,7 @@ class Order extends DataObject implements PermissionProvider {
 	}
 
 	/**
-	 * Retreive products for this order from the order {@link Item}s.
+	 * Retrieve products for this order from the order {@link Item}s.
 	 * 
 	 * @return ArrayList Set of {@link Product}s
 	 */
@@ -670,9 +665,10 @@ class Order extends DataObject implements PermissionProvider {
 	}
 	
 	/**
-	 * Helper to summarize payment status for an order.
+	 * TODO can't find a usage of this method, flagged as deprecated, remove with next version
 	 * 
 	 * @return String List of payments and their status
+	 * @deprecated
 	 */
 	public function SummaryOfPaymentStatus() {
 		$payments = $this->Payments();
@@ -697,6 +693,7 @@ class Order extends DataObject implements PermissionProvider {
 	 * Save modifiers for this Order at the checkout process. 
 	 * 
 	 * @param Array $data
+	 * @return static
 	 */
 	public function updateModifications(Array $data) {
 
@@ -722,7 +719,7 @@ class Order extends DataObject implements PermissionProvider {
 	}
 	
 	/**
-	 * Valdiate this Order for use in Validators at checkout. Makes sure
+	 * Validate this Order for use in Validators at checkout. Makes sure
 	 * Items exist and each Item is valid.
 	 * 
 	 * @return ValidationResult
@@ -762,16 +759,6 @@ class Order extends DataObject implements PermissionProvider {
 	}
 	
 	/**
-	 * By default Orders are always valid
-	 * 
-	 * @see DataObject::validate()
-	 */
-	public function validate() {
-		$result = parent::validate();
-		return $result;
-	}
-	
-	/**
 	 * Delete abandoned carts according to the Order timeout. This will release the stock 
 	 * in the carts back to the shop. Can be run from a cron job task, also run on Product, Cart and
 	 * Checkout pages so that cron job is not necessary.
@@ -800,7 +787,7 @@ class Order extends DataObject implements PermissionProvider {
 	/**
 	 * Get modifications that apply changes to the Order sub total.
 	 * 
-	 * @return DataList Set of Modification DataObjects
+	 * @return null|DataList Set of Modification DataObjects
 	 */
 	public function SubTotalModifications() {
 		$mods = $this->Modifications();
@@ -813,7 +800,7 @@ class Order extends DataObject implements PermissionProvider {
 	/**
 	 * Get modifications that apply changes to the Order total (not the order sub total).
 	 * 
-	 * @return DataList Set of Modification DataObjects
+	 * @return null|DataList Set of Modification DataObjects
 	 */
 	public function TotalModifications() {
 		$mods = $this->Modifications();
@@ -823,12 +810,22 @@ class Order extends DataObject implements PermissionProvider {
 		return null;
 	}
 
+	/**
+	 * @return DataList
+	 */
 	public function CustomerUpdates() {
 		return $this->Updates()->where("\"Visible\" = 1");
 	}
 
 }
 
+/**
+ * @property string Status
+ * @property string Note
+ * @property bool Visible
+ * @method Order Order
+ * @method Member Member
+ */
 class Order_Update extends DataObject {
 
 	private static $singular_name = 'Update';
@@ -840,11 +837,6 @@ class Order_Update extends DataObject {
 		'Visible' => 'Boolean'
 	);
 
-	/**
-	 * Relations for this class
-	 * 
-	 * @var Array
-	 */
 	private static $has_one = array(
 		'Order' => 'Order',
 		'Member' => 'Member'
@@ -858,11 +850,17 @@ class Order_Update extends DataObject {
 		'VisibleSummary' => 'Visible'
 	);
 
+	/**
+	 * TODO are we sure this is the way to go?
+	 * @param null $member
+	 * @return bool
+	 */
 	public function canDelete($member = null) {
 		return false;
 	}
 
 	public function delete() {
+		// TODO this obviously will never be true, as the canDelete above returns false
 		if ($this->canDelete(Member::currentUser())) {
 			parent::delete();
 		}
@@ -877,7 +875,7 @@ class Order_Update extends DataObject {
 
 		parent::onAfterWrite();
 		
-		//Update the Order, setting the same status
+		// Update the Order, setting the same status
 		if ($this->Status) {
 			$order = $this->Order();
 			if ($order->exists()) {
@@ -887,27 +885,36 @@ class Order_Update extends DataObject {
 		}
 	}
 
+	/**
+	 * @return FieldList
+	 */
 	public function getCMSFields() {
 
 		$fields = parent::getCMSFields();
 
-		$visibleField = DropdownField::create('Visible', 'Visible', array(
-			1 => 'Yes',
-			0 => 'No'
-		))->setRightTitle('Should this update be visible to the customer?');
+		$visibleField = DropdownField::create('Visible', _t('Order_Update.Visible', 'Visible'), array(
+			1 => _t('Order_Update.VisibleYes', 'Yes'),
+			0 => _t('Order_Update.VisibleNo', 'No')
+		))->setRightTitle( _t('Order_Update.VisibleHint', 'Should this update be visible to the customer?'));
 		$fields->replaceField('Visible', $visibleField);
 
-		$memberField = HiddenField::create('MemberID', 'Member', Member::currentUserID());
+		$memberField = HiddenField::create('MemberID', '', Member::currentUserID());
 		$fields->replaceField('MemberID', $memberField);
 		$fields->removeByName('OrderID');
 
 		return $fields;
 	}
 
+	/**
+	 * @return DBField
+	 */
 	public function Created() {
 		return $this->dbObject('Created');
 	}
 
+	/**
+	 * @return string
+	 */
 	public function VisibleSummary() {
 		return ($this->Visible) ? 'True' : '';
 	}
