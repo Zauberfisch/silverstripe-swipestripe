@@ -60,7 +60,7 @@ class Customer extends Member {
 			$customerGroup->setCode($customerGroup->Title);
 			$customerGroup->write();
 
-//			Permission::grant($customerGroup->ID, 'VIEW_ORDER');
+			Permission::grant($customerGroup->ID, 'VIEW_ORDER');
 		}
 	}
 
