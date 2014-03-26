@@ -2,9 +2,9 @@
 		<thead>
 			<tr>
 				<th><%t Order.PRODUCT 'Product' %></th>
-				<th><%t Order.PRICE 'Price ({$currency})' currency=$TotalPrice.Currency %></th>
+				<th><%t Order.PRICE 'Price ({currency})' currency=$TotalPrice.Currency %></th>
 				<th><%t Order.QUANTITY 'Quantity' %></th>
-				<th class="totals-column"><%t Order.TOTAL 'Total ({$currency})' currency=$TotalPrice.Currency %></th>
+				<th class="totals-column"><%t Order.TOTAL_COLUMN 'Total ({currency})' currency=$TotalPrice.Currency %></th>
 			</tr>
 		</thead>
 		<tbody>

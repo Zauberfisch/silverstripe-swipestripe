@@ -36,10 +36,10 @@ en:
     NOTE: 'Note:'
     NO_ITEMS_IN_CART: 'There are no items in your cart.'
     POWERED_BY: 'powered by'
-    PRICE: 'Price ({$currency})'
+    PRICE: 'Price ({currency})'
     PRODUCT: Product
     QUANTITY: Quantity
-    TOTAL: 'Total ({$currency})'
+    TOTAL: 'Total ({currency})'
     UPDATE_CART: 'Update Cart'
   CartPage:
     DESCRIPTION: 'Generic content page'
@@ -48,11 +48,12 @@ en:
   CheckoutFormOrder:
     LOADING: Loading...
     NO_ITEMS_IN_CART: 'There are no items in your cart.'
-    PRICE: 'Price ({$currency})'
+    PRICE: 'Price ({currency})'
     PRODUCT: Product
     QUANTITY: Quantity
     SUB_TOTAL: 'Sub Total'
     TOTAL: Total
+    TOTAL_COLUMN: 'Total ({currency})'
     YOUR_ORDER: 'Your Order'
   CheckoutPage:
     ACCOUNT: Account
@@ -107,12 +108,13 @@ en:
     SINGULARNAME: Option
   Order:
     PLURALNAME: Orders
-    PRICE: 'Price ({$currency})'
+    PRICE: 'Price ({currency})'
     PRODUCT: Product
     QUANTITY: Quantity
     SINGULARNAME: Order
     SUB_TOTAL: 'Sub Total'
     TOTAL: Total
+    TOTAL_COLUMN: 'Total ({currency})'
   OrderAdmin:
     ORDER: Order
   OrderNotes:

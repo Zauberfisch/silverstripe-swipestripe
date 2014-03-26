@@ -3,9 +3,9 @@
 	<thead>
 		<tr>
 			<th><% _t('CheckoutFormOrder.PRODUCT', 'Product') %></th>
-			<th><%t CheckoutFormOrder.PRICE 'Price ({$currency})' currency=$TotalPrice.Currency %></th>
+			<th><%t CheckoutFormOrder.PRICE 'Price ({currency})' currency=$TotalPrice.Currency %></th>
 			<th><% _t('CheckoutFormOrder.QUANTITY', 'Quantity') %></th>
-			<th class="totals-column"><%t CheckoutFormOrder.TOTAL 'Total ({$currency})' currency=$TotalPrice.Currency %></th>
+			<th class="totals-column"><%t CheckoutFormOrder.TOTAL_COLUMN 'Total ({currency})' currency=$TotalPrice.Currency %></th>
 		</tr>
 	</thead>
 	<tbody>
