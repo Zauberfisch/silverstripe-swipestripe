@@ -31,14 +31,15 @@ en:
     LOADING: Loading...
     REQUIREJS: 'The CMS requires that you have JavaScript enabled.'
   CartForm:
+    ALLTOTAL: '&nbsp;'
     GO_TO_CHECKOUT: 'Go To Checkout'
     NOTE: 'Note:'
     NO_ITEMS_IN_CART: 'There are no items in your cart.'
     POWERED_BY: 'powered by'
-    PRICE: Price
+    PRICE: 'Price ({$currency})'
     PRODUCT: Product
     QUANTITY: Quantity
-    TOTAL: Total
+    TOTAL: 'Total ({$currency})'
     UPDATE_CART: 'Update Cart'
   CartPage:
     DESCRIPTION: 'Generic content page'
@@ -47,7 +48,7 @@ en:
   CheckoutFormOrder:
     LOADING: Loading...
     NO_ITEMS_IN_CART: 'There are no items in your cart.'
-    PRICE: Price
+    PRICE: 'Price ({$currency})'
     PRODUCT: Product
     QUANTITY: Quantity
     SUB_TOTAL: 'Sub Total'
@@ -96,6 +97,8 @@ en:
   Modification:
     PLURALNAME: Modifications
     SINGULARNAME: Modification
+  NotificationEmail:
+    Subject: '{subject} - Order #{orderID}'
   Option:
     PLURALNAME: Options
     SINGULARNAME: Option
@@ -104,7 +107,7 @@ en:
     SINGULARNAME: Option
   Order:
     PLURALNAME: Orders
-    PRICE: Price
+    PRICE: 'Price ({$currency})'
     PRODUCT: Product
     QUANTITY: Quantity
     SINGULARNAME: Order
@@ -131,6 +134,10 @@ en:
   Order_Update:
     PLURALNAME: Updates
     SINGULARNAME: Update
+    Visible: Visible
+    VisibleHint: 'Should this update be visible to the customer?'
+    VisibleNo: No
+    VisibleYes: Yes
   Product:
     DESCRIPTION: 'Generic content page'
     FREE: Free
@@ -145,10 +152,12 @@ en:
     PRODUCT_ADDED_LINK: 'The product was added to {openanchor}your cart{closeanchor}.'
     QUANTITY: Quantity
     VARIATIONS_REQUIRED: 'This product requires options before it can be added to the cart.'
+  ReceiptEmail:
+    Subject: '{subject} - Order #{orderID}'
   ShopConfig:
     BASE_CURRENCY: 'Base Currency'
     BASE_CURRENCY_SYMBOL: 'Base Currency Symbol'
-    BASE_CURRENCY_WARNING: "\n				 Warning: Base currency is not set, please set base currency in the shop settings area before proceeding\n		 "
+    BASE_CURRENCY_WARNING: "\r\n				 Warning: Base currency is not set, please set base currency in the shop settings area before proceeding\r\n		 "
     FROM: From
     MESSAGE: Message
     MESSAGE_DETAILS: 'Order details are included in the email below this message'

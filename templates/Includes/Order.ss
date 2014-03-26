@@ -1,10 +1,10 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th><% _t('Order.PRODUCT','Product') %></th>
-				<th><% _t('Order.PRICE','Price') %> ($TotalPrice.Currency)</th>
-				<th><% _t('Order.QUANTITY','Quantity') %></th>
-				<th class="totals-column"><% _t('Order.TOTAL','Total') %> ($TotalPrice.Currency)</th>
+				<th><%t Order.PRODUCT 'Product' %></th>
+				<th><%t Order.PRICE 'Price ({$currency})' currency=$TotalPrice.Currency %></th>
+				<th><%t Order.QUANTITY 'Quantity' %></th>
+				<th class="totals-column"><%t Order.TOTAL 'Total ({$currency})' currency=$TotalPrice.Currency %></th>
 			</tr>
 		</thead>
 		<tbody>
