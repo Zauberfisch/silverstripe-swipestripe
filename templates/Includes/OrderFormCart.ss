@@ -27,12 +27,14 @@
 		<% loop Top.SubTotalModificationsFields %>
 			$FieldHolder
 		<% end_loop %>
-		
-		<tr>
-			<td class="row-header"><% _t('CheckoutFormOrder.SUB_TOTAL','Sub Total') %></td>
-			<td class="totals-column" colspan="3">$SubTotalPrice.Nice</td>
-		</tr>
-		
+
+		<% if $Top.TotalModificationsFields %>
+			<tr>
+				<td class="row-header"><% _t('CheckoutFormOrder.SUB_TOTAL','Sub Total') %></td>
+				<td class="totals-column" colspan="3">$SubTotalPrice.Nice</td>
+			</tr>
+		<% end_if %>
+
 		<% loop Top.TotalModificationsFields %>
 			$FieldHolder
 		<% end_loop %>
