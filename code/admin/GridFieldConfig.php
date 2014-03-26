@@ -68,6 +68,9 @@ class GridFieldConfig_BasicSortable extends GridFieldConfig {
 		if (class_exists('GridFieldSortableRows')) {
 			$this->addComponent(new GridFieldSortableRows('SortOrder'));
 		}
+		if (class_exists('GridFieldOrderableRows')) {
+			$this->addComponent(new GridFieldOrderableRows('SortOrder'));
+		}
 
 		$this->addComponent($pagination = new GridFieldPaginator($itemsPerPage));
 		$this->addComponent(new GridFieldPageCount('toolbar-header-right'));
