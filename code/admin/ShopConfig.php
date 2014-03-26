@@ -8,6 +8,7 @@
  * @subpackage admin
  * @property string LicenceKey
  * @property string BaseCurrency
+ * @property string BaseCurrencySymbol
  * @property int CartTimeout
  * @property string CartTimeoutUnit
  * @property bool StockCheck

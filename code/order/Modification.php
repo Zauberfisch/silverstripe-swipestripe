@@ -2,7 +2,7 @@
 /**
  * Modification for the {@link Order}, saves data that is set by {@link Modifier}s 
  * e.g: shipping, tax, vouchers etc. Instead of linking to a {@link Modifier} it takes the Amount
- * that the modifier will ammend the {@link Order} total by and the Description of the Modifier
+ * that the modifier will amend the {@link Order} total by and the Description of the Modifier
  * and saves that - denormalising the data - so that Modifiers can be deleted without losing
  * any information from the Order.
  * 
@@ -10,6 +10,13 @@
  * @copyright Copyright (c) 2011, Frank Mullenger
  * @package swipestripe
  * @subpackage order
+ * @property int Value
+ * @property float Price
+ * @property string Description
+ * @property bool SubTotalModifier
+ * @property int SortOrder
+ * @property int OrderID
+ * @method Order Order
  */
 class Modification extends DataObject {
 
