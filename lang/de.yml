@@ -1,3 +1,179 @@
 de:
   ShopAdmin:
-    MENUTITLE: Geschäft
+    MENUTITLE: 'Geschäft'
+  ShopAdmin_Attribute:
+    MENUTITLE: 'Eigenschaft'
+  ShopAdmin_BaseCurrency:
+    MENUTITLE: 'Grund Währung'
+  ShopAdmin_EmailAdmin:
+    MENUTITLE: 'Emails'
+  AccountPage:
+    DATE: Datum
+    DESCRIPTION: ''
+    NO_ORDERS: 'Sie haben noch keine Bestellungen.'
+    NO_ORDER_EXISTS: 'Bestellung nicht gefunden.'
+    PLURALNAME: 'Account Seiten'
+    SINGULARNAME: 'Account Seite'
+    STATUS: Status
+    TOTAL: Summe
+    VIEW_THIS_ORDER: 'Die Bestellung'
+  AccountPage_order:
+    WARNING: Warnung!
+  Attribute:
+    PLURALNAME: Eigenschaften
+    SINGULARNAME: Eigenschaft
+  Attribute_Default:
+    PLURALNAME: Eigenschaften
+    SINGULARNAME: Eigenschaft
+  BackLink_Button_ss:
+    Back: 'Zurück'
+  CMSLoadingScreen_ss:
+    LOADING: 'Lade ...'
+    REQUIREJS: 'JavaScript muss aktiviert sein.'
+  CartForm:
+    ALLTOTAL: '&nbsp;'
+    GO_TO_CHECKOUT: 'Zum Check-out'
+    NOTE: 'Anmerkung:'
+    NO_ITEMS_IN_CART: 'Keine Produkte im Warenkorb.'
+    POWERED_BY: 'powered by'
+    PRICE: Preis
+    PRODUCT: Produkt
+    QUANTITY: Menge
+    TOTAL: Summe
+    UPDATE_CART: 'Warenkorb aktualisieren'
+  CartPage:
+    DESCRIPTION: ''
+    PLURALNAME: 'Warenkorb Seiten'
+    SINGULARNAME: 'Warenkorb Seite'
+  CheckoutFormOrder:
+    LOADING: 'Lade ...'
+    NO_ITEMS_IN_CART: 'Keine Produkte im Warenkorb.'
+    PRICE: Preis
+    PRODUCT: Produkt
+    QUANTITY: Menge
+    SUB_TOTAL: 'Zwischensumme'
+    TOTAL: Summe
+    YOUR_ORDER: 'Ihre Bestellung'
+  CheckoutPage:
+    ACCOUNT: Account
+    ALREADY_MEMBER: 'Haben Sie bereits einen Account?  %s zum login. %s'
+    DESCRIPTION: ''
+    EMAIL: 'E-Mail'
+    MEMBER_ALREADY_EXISTS: 'Diese E-Mail Adresse existiert bereits, bitte loggen sie sich ein um mit der Bestellung fort zu fahren.'
+    NOTE: 'Anmerkung:'
+    NOTES_ABOUT_ORDER: 'Anmerkung zu dieser Bestellung'
+    NOT_VALID_METHOD: 'Entschuldigung, es ist ein Fehler aufgetreten, bitte versuchen Sie eine andere Zahlungs-Methode oder kontaktieren Sie uns'
+    PASSWORD: Passwort
+    PAYMENT: Zahlung
+    PLEASE_CHOOSE_PASSWORD: 'Bitten wählen Sie ein Passwort, zur Erstellung eines Accounts.'
+    PLEASE_ENTER_EMAIL_ADDRESS: 'Bitte geben Sie eine E-Mail Adresse ein.'
+    PLURALNAME: 'Checkout Seiten'
+    PROCEED_TO_PAY: 'Bestätigen'
+    SELECT_PAYMENT_METHOD: 'Bitte wählen Sie eine Zahlungs Methode aus.'
+    SINGULARNAME: 'Checkout Seite'
+    TRY_AGAIN: 'Bitte versuchen Sie es erneut.'
+  Customer:
+    PLURALNAME: Kunden
+    SINGULARNAME: Kunde
+  Form:
+    ITEM_IS_NOT_IN_ORDER: 'Dieses Produkt ist nicht in der Bestellung.'
+    ITEM_QUANTITY_INCORRECT: 'Maximal Menge Überschritten.'
+    ITEM_QUANTITY_LESS_ONE: 'Mindestens Menge ist 1.'
+    ORDER_IS_NOT_VALID: 'Keine Produkte im Warenkorb.'
+    VALIDATIONFAILED: 'Ein Fehler ist aufgetreten'
+  GridFieldDetailForm:
+    CancelBtn: Abbrechen
+    Create: Erstellen
+    Delete: 'Löschen'
+    Save: Speichern
+  Item:
+    PLURALNAME: Posten
+    SINGULARNAME: Posten
+  ItemOption:
+    PLURALNAME: 'Posten Optionen'
+    SINGULARNAME: 'Posten Option'
+  LeftAndMain:
+    PreviewButton: Vorschau
+  Modification:
+    PLURALNAME: Modifizierung
+    SINGULARNAME: Modifizierungen
+  NotificationEmail:
+    Subject: '{subject} - Bestellung #{orderID}'
+  Option:
+    PLURALNAME: Optionen
+    SINGULARNAME: Option
+  Option_Default:
+    PLURALNAME: Options
+    SINGULARNAME: Option
+  Order:
+    PLURALNAME: Bestellungen
+    PRICE: Preis
+    PRODUCT: Produkt
+    QUANTITY: Menge
+    SINGULARNAME: Bestellung
+    SUB_TOTAL: 'Zwischensumme'
+    TOTAL: Summe
+  OrderAdmin:
+    ORDER: Bestellung
+  OrderNotes:
+    NOTES: Anmerkungen
+  OrderPayments:
+    AMOUNT: Betrag
+    DATE: Datum
+    PAYMENT: Zahlung
+    PAYMENT_STATUS: 'Zahlungsstatus'
+    TOTAL_OUTSTANDING: 'ausstehender Betrag'
+  Order_NotificationEmail:
+    LOGIN: 'Bestellung im CMS Verwalten'
+    ORDER: Bestellung
+  Order_ReceiptEmail:
+    GREETING: Hallo
+    ORDER: Bestellung
+    PAYMENTNOTICE: 'Bitte beachten Sie das Ihre Bestellung erst nach volständiger Bezahlung versendet wird.'
+    VIEW_ORDER: 'Bestellung anzeigen'
+  Order_Update:
+    PLURALNAME: Updates
+    SINGULARNAME: Update
+    Visible: Sichtbar
+    VisibleHint: 'Soll dieses Update für den Kunden sichtbar sein?'
+    VisibleNo: Nein
+    VisibleYes: Ja
+  Product:
+    DESCRIPTION: ''
+    FREE: Kostenlos
+    PLURALNAME: Produkte
+    SINGULARNAME: Produkt
+  ProductForm:
+    ADD_TO_CART: 'in den Warenkorb'
+    BASE_CURRENCY_NOT_SET: 'Grund Währung ist nicht gesetzt.'
+    ITEM_QUANTITY_INCORRECT: 'Maximal Menge Überschritten.'
+    ITEM_QUANTITY_LESS_ONE: 'Mindestens Menge ist 1.'
+    PRODUCT_ADDED: 'Das Produkt wurde in den Warenkorb gelegt.'
+    PRODUCT_ADDED_LINK: 'Das Produkt wurde in den {openanchor}Warenkorb{closeanchor} gelegt.'
+    QUANTITY: Menge
+    VARIATIONS_REQUIRED: 'Dieses Produkt kann nur mit Optionen in den Warenkorb gelegt werden.'
+  ReceiptEmail:
+    Subject: '{subject} - Bestellung #{orderID}'
+  ShopConfig:
+    BASE_CURRENCY: 'Grund Währung'
+    BASE_CURRENCY_SYMBOL: 'Symbol der Grund Währung'
+    BASE_CURRENCY_WARNING: "\r\n				 Warnung: Grund Währung nicht gesetzt, die Grund Währung muss unter Shop Einstellungen gesetzt werden, bevor der Shop verwendet werden kann.\r\n		 "
+    FROM: Von
+    MESSAGE: Nachricht
+    MESSAGE_DETAILS: 'Bestellungs Details werden im E-Mail unterhalb dieser Nachricht angezeigt'
+    NOTIFICATION_FROM: 'E-Mail Adresse des Kundens'
+    PLURALNAME: Einstellungen
+    RECEIPT_TO: 'E-Mail Adresse des Kundens'
+    SIGNATURE: Signatur
+    SINGULARNAME: Einstellungen
+    SUBJECT_LINE: 'Betreff'
+    TO: An
+  SiteTree:
+    PLURALNAME: Seiten
+    SINGULARNAME: Seite
+  Variation:
+    PLURALNAME: Variationen
+    SINGULARNAME: Variation
+  Variation_Options:
+    PLURALNAME: 'Variations Optionen'
+    SINGULARNAME: 'Variations Option'
