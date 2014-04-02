@@ -8,8 +8,11 @@
 		<% else %>
 			$Item.Product.Title
 		<% end_if %>
-		<br/>
-		$Item.SummaryOfOptions
+		<% if $Item.SummaryOfOptions %>
+			<div class="summary-of-options">
+				$Item.SummaryOfOptions
+			</div>
+		<% end_if %>
 		<% if $Message %>
 			<div class="message $MessageType">
 				$Message

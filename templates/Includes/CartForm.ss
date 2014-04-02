@@ -1,13 +1,11 @@
 <% if $IncludeFormTag %>
-<form $FormAttributes>
+	<form $FormAttributes>
 <% end_if %>
-
-	<% if $Message %>
+<% if $Message %>
 		<p id="{$FormName}_error" class="message $MessageType">$Message</p>
-	<% else %>
+<% else %>
 		<p id="{$FormName}_error" class="message $MessageType" style="display: none"></p>
-	<% end_if %>
-	
+<% end_if %>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -19,52 +17,40 @@
 			</tr>
 		</thead>
 		<tbody>
-			
 			<% if $Cart.Items %>
-			
 				<% loop $Fields %>
 					$FieldHolder
 				<% end_loop %>
-				
 				<% with $Cart %>
-				<tr class="total-price">
-					<td colspan="4"><%t CartForm.ALLTOTAL '&nbsp;' %></td>
-					<td><strong>$CartTotalPrice.Nice</strong></td>
-				</tr>
+					<tr class="total-price">
+						<td class="total-price-label" colspan="4"><%t CartForm.ALLTOTAL '&nbsp;' %></td>
+						<td class="total-price-value"><strong>$CartTotalPrice.Nice</strong></td>
+					</tr>
 				<% end_with %>
-			
 			<% else %>
 				<tr>
-
 					<td colspan="6">
 						<p class="alert alert-info">
-							<strong class="alert-heading"><%t CartForm.NOTE 'Note:' %></strong>
 							<%t CartForm.NO_ITEMS_IN_CART 'There are no items in your cart.' %>
 						</p>
 					</td>
-
 				</tr>
 			<% end_if %>
-
 		</tbody>
 	</table>
-
 	<div class="Actions">
 		<p class="attribution">
-			<%t CartForm.POWERED_BY 'powered by' %> <a target="_blank" href="http://swipestripe.com">SwipeStripe Ecommerce</a>
+			<%t CartForm.POWERED_BY 'powered by' %>
+			<a target="_blank" href="http://swipestripe.com">SwipeStripe Ecommerce</a>
 		</p>
-		 
 		<% if $Cart.Items %>
 			<% if $Actions %>
-
 				<% loop $Actions %>
 					$Field
 				<% end_loop %>
-			
 			<% end_if %>
 		<% end_if %>
 	</div>
-	
 <% if $IncludeFormTag %>
-</form>
+	</form>
 <% end_if %>

@@ -31,9 +31,8 @@ de:
     LOADING: 'Lade ...'
     REQUIREJS: 'JavaScript muss aktiviert sein.'
   CartForm:
-    ALLTOTAL: '&nbsp;'
+    ALLTOTAL: 'Gesammtsumme'
     GO_TO_CHECKOUT: 'Zum Check-out'
-    NOTE: 'Anmerkung:'
     NO_ITEMS_IN_CART: 'Keine Produkte im Warenkorb.'
     POWERED_BY: 'powered by'
     PRICE: Preis

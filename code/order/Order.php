@@ -43,7 +43,7 @@ class Order extends DataObject implements PermissionProvider {
 	const STATUS_DISPATCHED = 'Dispatched';
 
 	/**
-	 * DB fields for Order, such as Stauts, Payment Status etc.
+	 * DB fields for Order, such as Status, Payment Status etc.
 	 * 
 	 * @var Array
 	 */
@@ -213,7 +213,7 @@ class Order extends DataObject implements PermissionProvider {
 		'onBeforePayment' => array(),
 		'onAfterPayment' => array(
 			'ReceiptEmail',
-//			'NotificationEmail',
+			'NotificationEmail',
 		),
 		'onBeforeOrderUpdateCreate' => array(),
 		'onAfterOrderUpdateCreate' => array(),

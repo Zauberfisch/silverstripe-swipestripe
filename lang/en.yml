@@ -33,7 +33,6 @@ en:
   CartForm:
     ALLTOTAL: '&nbsp;'
     GO_TO_CHECKOUT: 'Go To Checkout'
-    NOTE: 'Note:'
     NO_ITEMS_IN_CART: 'There are no items in your cart.'
     POWERED_BY: 'powered by'
     PRICE: 'Price ({currency})'
