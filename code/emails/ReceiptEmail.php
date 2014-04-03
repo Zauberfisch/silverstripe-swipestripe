@@ -22,8 +22,8 @@ class ReceiptEmail extends ProcessedEmail {
 			'ReceiptEmail.Subject',
 			'{subject} - Order #{orderID}',
 			array(
-				$shopConfig->ReceiptSubject ? : 'Receipt',
-				$order->ID,
+				'subject' => $shopConfig->ReceiptSubject ? : 'Receipt',
+				'orderID' => $order->BillingIDNice(),
 			)
 		);
 		$this->setTemplate('Order_ReceiptEmail');

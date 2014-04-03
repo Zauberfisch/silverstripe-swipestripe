@@ -152,7 +152,7 @@ de:
     QUANTITY: Menge
     VARIATIONS_REQUIRED: 'Dieses Produkt kann nur mit Optionen in den Warenkorb gelegt werden.'
   ReceiptEmail:
-    Subject: '{subject} - Bestellung #{orderID}'
+    Subject: '{subject} für Bestellung #{orderID}'
   ShopConfig:
     BASE_CURRENCY: 'Grund Währung'
     BASE_CURRENCY_SYMBOL: 'Symbol der Grund Währung'

@@ -31,8 +31,8 @@ class NotificationEmail extends ProcessedEmail {
 			'NotificationEmail.Subject',
 			'{subject} - Order #{orderID}',
 			array(
-				$shopConfig->NotificationSubject ? : 'Notification',
-				$order->ID,
+				'subject' => $shopConfig->NotificationSubject ? : 'Notification',
+				'orderID' => $order->BillingIDNice(),
 			)
 		);
 		$this->setTemplate('Order_NotificationEmail');
