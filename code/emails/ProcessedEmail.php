@@ -61,7 +61,7 @@ class ProcessedEmail extends Email {
 	protected function InlineCSS() {
 		// Get css for Email by reading css file and put css inline for emogrification
 		$file = Config::inst()->get($this->class, 'css_file');
-		if (!$file || !file_exists(Director::getAbsFile($file)) || is_file(Director::getAbsFile($file))) {
+		if (!$file || !file_exists(Director::getAbsFile($file)) || !is_file(Director::getAbsFile($file))) {
 			$file = 'swipestripe/css/ShopEmail.css';
 		}
 		return sprintf('<style>%s</style>', file_get_contents(Director::getAbsFile($file)));
