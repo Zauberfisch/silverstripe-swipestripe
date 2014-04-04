@@ -402,17 +402,19 @@ class OrderForm_Validator extends RequiredFields {
 				$valid = false;
 			}
 		}
-		$data = $this->form->getData();
-		$existingCustomer = Customer::get()->filter('Email', $data['Email']);
-		if ($existingCustomer && $existingCustomer->exists()) {
-			$this->validationError(
-				'Email',
-				_t(
-					'CheckoutPage.MEMBER_ALREADY_EXISTS',
-					'Sorry, a member already exists with that email address. If this is your email address, please log in first before placing your order.'
-				),
-				'validation'
-			);
+		if (isset($data['Email']) && $data['Email']) {
+			$data = $this->form->getData();
+			$existingCustomer = Customer::get()->filter('Email', $data['Email']);
+			if ($existingCustomer && $existingCustomer->exists()) {
+				$this->validationError(
+					'Email',
+					_t(
+						'CheckoutPage.MEMBER_ALREADY_EXISTS',
+						'Sorry, a member already exists with that email address. If this is your email address, please log in first before placing your order.'
+					),
+					'validation'
+				);
+			}
 		}
 		return $valid;
 	}
