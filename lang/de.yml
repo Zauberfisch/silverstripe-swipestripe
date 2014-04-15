@@ -32,7 +32,7 @@ de:
     REQUIREJS: 'JavaScript muss aktiviert sein.'
   CartForm:
     ALLTOTAL: 'Gesammtsumme'
-    GO_TO_CHECKOUT: 'Zum Check-out'
+    GO_TO_CHECKOUT: 'zur Bestellung'
     NO_ITEMS_IN_CART: 'Keine Produkte im Warenkorb.'
     POWERED_BY: 'powered by'
     PRICE: Preis
