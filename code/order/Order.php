@@ -426,7 +426,7 @@ class Order extends DataObject implements PermissionProvider {
 		$args = func_get_args();
 		$event = array_shift($args);
 		$events = Config::inst()->get($this->class, 'notification_handlers');
-		if (isset($events[$event])) {
+		if (isset($events[$event]) && $this->getPaid()) {
 			$handlers = is_array($events[$event]) ? $events[$event] : array($events[$event]);
 			$this->extend('onBeforeSendNotifications', $handlers, $args, $event);
 			if (count($handlers)) {
